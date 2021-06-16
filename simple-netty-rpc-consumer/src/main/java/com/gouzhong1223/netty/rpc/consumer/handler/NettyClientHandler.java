@@ -18,7 +18,7 @@ import java.util.concurrent.Callable;
  * @Version : 1.0.0
  */
 @Component
-public class NettyClientHandler extends SimpleChannelInboundHandler<String> implements Callable {
+public class NettyClientHandler extends SimpleChannelInboundHandler<String> implements Callable<Object> {
     ChannelHandlerContext context;
     private String regMsg;
     private String respMsg;

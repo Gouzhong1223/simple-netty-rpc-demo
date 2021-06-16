@@ -51,7 +51,7 @@ public class NettyClient implements InitializingBean {
                     .channel(NioSocketChannel.class)
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
-                        protected void initChannel(SocketChannel ch) throws Exception {
+                        protected void initChannel(SocketChannel ch) {
                             ch.pipeline().addLast(new StringDecoder());
                             ch.pipeline().addLast(new StringEncoder());
                             ch.pipeline().addLast(nettyClientHandler);
@@ -77,7 +77,7 @@ public class NettyClient implements InitializingBean {
      */
     public Object send(String meg) throws ExecutionException, InterruptedException {
         nettyClientHandler.setRegMsg(meg);
-        Future submit = executorService.submit(nettyClientHandler);
+        Future<Object> submit = executorService.submit(nettyClientHandler);
         return submit.get();
     }
 
